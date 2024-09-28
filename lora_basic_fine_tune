@@ -59,7 +59,9 @@ print(small_dataset[0])
 
 model_id = "databricks/dolly-v2-3b"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
-tokenizer.pad_token = tokenizer.eos_token
+# Check if pad token exists
+if tokenizer.pad_token is None:
+    tokenizer.pad_token = tokenizer.eos_token
 
 #loading the model using AutoModelForCausalLM
 model = AutoModelForCausalLM.from_pretrained(
